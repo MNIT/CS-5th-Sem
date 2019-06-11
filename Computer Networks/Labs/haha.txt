@@ -1,0 +1,1 @@
+for((i=0;i<1000000;i++)); do xcowsay --image="mnitjas204.png" -t 1 message ; done

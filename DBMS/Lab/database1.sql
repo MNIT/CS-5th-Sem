@@ -1,0 +1,194 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.10deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Aug 16, 2017 at 10:10 PM
+-- Server version: 5.5.55-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.21
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `Adarsh`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DEPARTMENT`
+--
+
+CREATE TABLE IF NOT EXISTS `DEPARTMENT` (
+  `DNAME` varchar(255) NOT NULL,
+  `DNUMBER` int(10) NOT NULL,
+  `MGRSSN` int(11) NOT NULL,
+  `MSRSTARTDATE` varchar(50) NOT NULL,
+  PRIMARY KEY (`DNUMBER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `DEPARTMENT`
+--
+
+INSERT INTO `DEPARTMENT` (`DNAME`, `DNUMBER`, `MGRSSN`, `MSRSTARTDATE`) VALUES
+('HEADQUARTERS', 1, 888665555, '190671'),
+('ADMINISTRATION', 4, 987654321, '010185'),
+('RESEARCH', 5, 333445555, '220578');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DEPENDENT`
+--
+
+CREATE TABLE IF NOT EXISTS `DEPENDENT` (
+  `ESSN` int(11) NOT NULL,
+  `DEPENDENT_NAME` varchar(255) NOT NULL,
+  `SEX` varchar(50) NOT NULL,
+  `BDATE` varchar(10) NOT NULL,
+  `RELATIONSHIP` varchar(255) NOT NULL,
+  PRIMARY KEY (`ESSN`,`DEPENDENT_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `DEPENDENT`
+--
+
+INSERT INTO `DEPENDENT` (`ESSN`, `DEPENDENT_NAME`, `SEX`, `BDATE`, `RELATIONSHIP`) VALUES
+(123456789, 'ALICE', 'F', '311278', 'DAUGHTER'),
+(123456789, 'ELIZABETH', 'F', '050557', 'SPOUSE'),
+(123456789, 'MICHAEL', 'M', '010178', 'SON'),
+(333445555, 'ALICE', 'F', '050476', 'DAUGHTER'),
+(333445555, 'JOY', 'F', '030548', 'SPOUSE'),
+(333445555, 'THEODORE', 'M', '251073', 'SON'),
+(987654321, 'ABNER', 'M', '290232', 'SPOUSE');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DEP_LOCATIONS`
+--
+
+CREATE TABLE IF NOT EXISTS `DEP_LOCATIONS` (
+  `DNUMBER` int(11) NOT NULL,
+  `DLOCATION` varchar(255) NOT NULL,
+  PRIMARY KEY (`DNUMBER`,`DLOCATION`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `DEP_LOCATIONS`
+--
+
+INSERT INTO `DEP_LOCATIONS` (`DNUMBER`, `DLOCATION`) VALUES
+(1, 'HOUSTON'),
+(4, 'STAFFORD'),
+(5, 'BELLAIRE'),
+(5, 'HOUSTON'),
+(5, 'SUGARLAND');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `EMPLOYEE`
+--
+
+CREATE TABLE IF NOT EXISTS `EMPLOYEE` (
+  `FNAME` varchar(255) NOT NULL,
+  `MINIT` varchar(255) NOT NULL,
+  `LNAME` varchar(255) NOT NULL,
+  `SSN` int(11) NOT NULL,
+  `BDATE` varchar(255) NOT NULL,
+  `ADDRESS` varchar(500) NOT NULL,
+  `SEX` varchar(10) NOT NULL,
+  `SALARY` int(50) NOT NULL,
+  `SUPERSSN` int(11) DEFAULT NULL,
+  `DNO` int(5) NOT NULL,
+  PRIMARY KEY (`SSN`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `EMPLOYEE`
+--
+
+INSERT INTO `EMPLOYEE` (`FNAME`, `MINIT`, `LNAME`, `SSN`, `BDATE`, `ADDRESS`, `SEX`, `SALARY`, `SUPERSSN`, `DNO`) VALUES
+('RAMESH', 'K', 'NARAYAN', 66884444, '150952', '975 FIRE OAK', 'M', 38000, 333445555, 5),
+('JOHN', 'B', 'SMITH', 123456789, '090155', '731 FONDREN', 'M', 30000, 333445555, 5),
+('FRANKLIN', 'T', 'WONG', 333445555, '081245', '638 VOSS', 'M', 40000, 888665555, 5),
+('JOYCE', 'A', 'ENGLISH', 453453453, '310762', '5631 RICE', 'F', 25000, 333445555, 5),
+('JAMES', 'E', 'BORG', 888665555, '101127', '450 STONE', 'M', 55000, NULL, 1),
+('JENNIFER', 'S', 'WALLACE', 987654321, '200631', '291 BERRY', 'F', 43000, 888665555, 4),
+('AHMAD', 'V', 'JABBAR', 987987987, '290359', '980 DALIAS', 'M', 25000, 987654321, 4),
+('ALICIA', 'J', 'ZELAYA', 999887777, '190758', '3321 CASTLE', 'F', 25000, 987654321, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PROJECT`
+--
+
+CREATE TABLE IF NOT EXISTS `PROJECT` (
+  `PNAME` varchar(255) NOT NULL,
+  `PNUMBER` int(11) NOT NULL,
+  `PLOCATION` varchar(255) NOT NULL,
+  `DNUM` int(11) NOT NULL,
+  PRIMARY KEY (`PNUMBER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `PROJECT`
+--
+
+INSERT INTO `PROJECT` (`PNAME`, `PNUMBER`, `PLOCATION`, `DNUM`) VALUES
+('PRODUCTX', 1, 'BELLAIRE', 5),
+('PRODUCTY', 2, 'SUGARLAND', 5),
+('PRODUCTZ', 3, 'HOUSTON', 5),
+('COMPUTERIZATION', 10, 'STAFFORD', 4),
+('REORGANIZATION', 20, 'HOUSTON', 1),
+('NEWBENEFITS', 30, 'STAFFORD', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `WORKS_ON`
+--
+
+CREATE TABLE IF NOT EXISTS `WORKS_ON` (
+  `ESSN` int(10) unsigned NOT NULL,
+  `PNO` int(10) unsigned NOT NULL,
+  `HOURS` float unsigned DEFAULT NULL,
+  PRIMARY KEY (`ESSN`,`PNO`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `WORKS_ON`
+--
+
+INSERT INTO `WORKS_ON` (`ESSN`, `PNO`, `HOURS`) VALUES
+(123456789, 1, 32.5),
+(123456789, 2, 7.5),
+(333445555, 2, 10),
+(333445555, 3, 10),
+(333445555, 10, 10),
+(333445555, 20, 10),
+(453453453, 1, 20),
+(453453453, 2, 20),
+(666884444, 3, 40),
+(888665555, 20, NULL),
+(987654321, 20, 15),
+(987654321, 30, 20),
+(987987987, 10, 35),
+(987987987, 30, 5),
+(999887777, 10, 10),
+(999887777, 30, 30);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
